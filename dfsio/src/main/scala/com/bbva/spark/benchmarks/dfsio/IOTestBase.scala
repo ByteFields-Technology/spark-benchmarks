@@ -16,18 +16,21 @@
 
 package com.bbva.spark.benchmarks.dfsio
 
-import com.typesafe.scalalogging.LazyLogging
+
+import org.apache.logging.log4j.scala.Logging
+import org.apache.logging.log4j.Level
+
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.FileSystem
 import org.apache.hadoop.io.{LongWritable, Text}
 import org.apache.spark.SerializableWritable
 import org.apache.spark.rdd.RDD
 
-abstract class IOTestBase(hadoopConf: Configuration, dataDir: String) extends Serializable with LazyLogging {
+abstract class IOTestBase(hadoopConf: Configuration, dataDir: String) extends Serializable  with Logging {
 
   protected val DefaultBufferSize: Int = 100000
   protected val wrappedConf = new SerializableWritable(hadoopConf)
-
+  
   def runIOTest(inputPaths: RDD[(Text, LongWritable)]): RDD[Stats] = {
 
     inputPaths.mapPartitions { partition =>

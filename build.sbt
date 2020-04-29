@@ -4,7 +4,7 @@ lazy val sparkBenchmarks = project
   .aggregate(dfsio)
 
 lazy val dfsio = project
-  .enablePlugins(AutomateHeaderPlugin, AssemblyPlugin, BuildInfoPlugin)
+  .enablePlugins( AssemblyPlugin, BuildInfoPlugin)
   .settings(
     name := "spark-benchmarks-dfsio",
     buildInfoPackage := "com.bbva.spark.benchmarks.dfsio",
@@ -12,3 +12,9 @@ lazy val dfsio = project
     Dependencies.Scopt,
     Dependencies.Alluxio
   )
+
+organizationName := "Heiko Seeberger"
+startYear := Some(2015)
+licenses += ("Apache-2.0", new URL("https://www.apache.org/licenses/LICENSE-2.0.txt"))
+headerLicenseStyle := HeaderLicenseStyle.SpdxSyntax
+

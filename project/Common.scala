@@ -1,6 +1,6 @@
 import de.heikoseeberger.sbtheader.HeaderPlugin.autoImport._
 import de.heikoseeberger.sbtheader._
-import de.heikoseeberger.sbtheader.license.Apache2_0
+import de.heikoseeberger.sbtheader.License.ALv2
 import sbt._
 import sbt.Keys._
 import sbt.plugins.JvmPlugin
@@ -42,12 +42,13 @@ object Common extends AutoPlugin {
 
       //autoAPIMappings := true,
       //apiURL := Some(url(s"http://developer.bbva.com/docs/api/spark-benchmarks/${version.value}")),
-
-      headers := headers.value ++ Map(
-        "scala" -> Apache2_0("2017", "Banco Bilbao Vizcaya Argentaria S.A."),
-        "java" -> Apache2_0("2017", "Banco Bilbao Vizcaya Argentaria S.A."),
-        "conf" -> Apache2_0("2017", "Banco Bilbao Vizcaya Argentaria S.A.", "#")
+/*
+      headerLicense := headerLicense.value ++ Map(
+        "scala" -> ALv2("2017", "Banco Bilbao Vizcaya Argentaria S.A."),
+        "java" -> ALv2("2017", "Banco Bilbao Vizcaya Argentaria S.A."),
+        "conf" -> ALv2("2017", "Banco Bilbao Vizcaya Argentaria S.A.", "#")
       )
+*/
     )
 
 }

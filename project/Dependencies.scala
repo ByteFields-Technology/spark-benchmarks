@@ -8,7 +8,7 @@ object Dependencies {
   val ScalaLoggingVersion = "3.5.0"
   val ScalaTestVersion = "3.0.1"
   val ScoptVersion = "3.5.0"
-  val SparkVersion = "2.1.0"
+  val SparkVersion = "2.4.4"
 
   val Common = Seq(
     libraryDependencies ++= Seq(
@@ -36,6 +36,11 @@ object Dependencies {
     )
   )
 
+libraryDependencies ++= Seq(
+  "org.apache.logging.log4j" %% "log4j-api-scala" % "11.0",
+  "org.apache.logging.log4j" % "log4j-api" % "2.11.0",
+  "org.apache.logging.log4j" % "log4j-core" % "2.11.0" % Runtime
+)
   val Scopt = Seq(
     libraryDependencies ++= Seq(
       "com.github.scopt" %% "scopt" % ScoptVersion
