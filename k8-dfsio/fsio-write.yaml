@@ -1,0 +1,56 @@
+#
+# Copyright 2017 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+apiVersion: "sparkoperator.k8s.io/v1beta2"
+kind: SparkApplication
+metadata:
+  name: fsio-write
+  namespace: sampletenant
+spec:
+  sparkConf:
+    spark.eventLog.enabled: "true"
+    spark.eventLog.dir: "maprfs:///apps/spark/sampletenant"
+  type: Scala
+  sparkVersion: 2.4.4
+  mode: cluster
+  image: gcr.io/mapr-252711/spark-2.4.4:202006160932C
+  imagePullPolicy: Always
+  imagePullSecrets:
+  - imagepull
+  mainClass: com.bbva.spark.benchmarks.dfsio.TestDFSIO 
+  mainApplicationFile: "maprfs:///benchmarks/spark-benchmarks-dfsio-0.11.0-SNAPSHOT-with-dependencies.jar"
+  arguments:
+    - "write"
+    - "--outputDir"
+    - "maprfs:///benchmarks/DFSIO"
+    - "--numFiles"
+    - "20"
+    - "--fileSize"
+    - "100GB" 
+  restartPolicy:
+    type: Never
+  driver:
+    cores: 1
+    coreLimit: "1000m"
+    memory: "512m"
+    labels:
+      version: 2.4.4
+  executor:
+    cores: 2
+    instances: 1
+    memory: "4g"
+    labels:
+      version: 2.4.4
